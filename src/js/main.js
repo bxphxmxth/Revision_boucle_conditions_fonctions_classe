@@ -366,25 +366,98 @@
 // ### Faire 2 instances de cette class.
 
 
-class Personnage {
-     constructor(age, nom, ville){
-          this.age = age;
-          this.nom = nom;
-          this.ville = ville;
-          this.sePresenter = () => {
-               console.log(`bonjour je m'appeller ${this.age}`);
-          }
-     }
-}
+// class Personnage {
+//      constructor(age, nom, ville){
+//           this.age = age;
+//           this.nom = nom;
+//           this.ville = ville;
+//           this.sePresenter = () => {
+//                console.log(`bonjour je m'appeller ${this.age}`);
+//           }
+//      }
+// }
 
-let naz = new Personnage("naz", 24, "bruxelles");
-let moun = new Personnage("mouna", 35, "bruxelles");
+// let naz = new Personnage("naz", 24, "bruxelles");
+// let moun = new Personnage("mouna", 35, "bruxelles");
 
-naz.sePresenter();
-moun.sePresenter();
+// naz.sePresenter();
+// moun.sePresenter();
 
 
 // ## EXO2
 // ### Rajouter la methode 'sePresenter' à la class Personnage qui dira "Bonjour, je m'appelle [nom-de-la-personne] !" via un console.log
 // ### Lancer cette méthode sur les deux instances de l'exo1
+
+
+
+
+// III
+// // ### Créer une class Objet
+
+class Objet{
+     constructor(nom, prix){
+          this.nom = nom;
+          this.prix = prix;
+     }
+}
+
+// ### Créer deux instances d'objets avec un nom et un prix
+
+let aquarium = new Objet("aquarium", 50);
+let terrarium = new Objet("terrarium", 60);
+
+// // ### Créer une boite (tableau) et mettre les deux objets dedans.
+
+let boite = [];
+boite.push(aquarium);
+boite.push(terrarium);
+
+
+// // ### Créer une class Personnage
+// // ### _Propriétés : nom(string), sac(tableau), argent(number)
+// // ### _Méthode : prendre(objet, boite)
+// // ### _Méthode : acheter(vendeur, objet)
+
+
+class Personnage{
+     constructor(nom, sac, argent){
+          this.nom = nom;
+          this.sac = sac;
+          this.argent = argent;
+          this.prendre = (objet, boite) =>{
+               this.sac.push(objet);
+               boite.splice(boite.indexOf(objet),1)
+               console.log(`${this.nom} a mit un ${objet.nom} dans son sac`);
+               
+          };
+          this.acheter = (vendeur, objet) =>{
+               if(this.argent >= objet.prix){
+                    this.argent -= objet.prix;
+                    vendeur.argent += objet.prix;
+                    this.sac.push(objet);
+                    vendeur.sac.splice(vendeur.sac.indexOf(objet),1);
+                    console.log(` ${this.nom} a acheté un ${objet.nom} à ${vendeur.nom}`);
+               }else{
+                    console.log("t'as pas assez bro");
+               }
+          
+          }
+
+     }    
+}
+
+
+// // ### Créer deux instances de Personnage et faites leur chacun [prendre] un objet de la boite avec leur méthode.
+
+let naz = new Personnage("naz", [], 500);
+let moun = new Personnage("Moun", [], 800);
+
+// ### Ensuite faites acheter à l'un des deux, l'objet de l'autre.
+
+naz.acheter(moun,terrarium);
+console.log(naz.sac);
+console.log(naz.argent);
+moun.acheter(naz, terrarium);
+console.log(moun.argent);
+
 
