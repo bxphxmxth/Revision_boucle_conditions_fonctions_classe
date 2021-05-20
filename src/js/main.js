@@ -394,70 +394,173 @@
 // III
 // // ### Créer une class Objet
 
-class Objet{
-     constructor(nom, prix){
+// class Objet{
+//      constructor(nom, prix){
+//           this.nom = nom;
+//           this.prix = prix;
+//      }
+// }
+
+// // ### Créer deux instances d'objets avec un nom et un prix
+
+// let aquarium = new Objet("aquarium", 50);
+// let terrarium = new Objet("terrarium", 60);
+
+// // // ### Créer une boite (tableau) et mettre les deux objets dedans.
+
+// let boite = [];
+// boite.push(aquarium);
+// boite.push(terrarium);
+
+
+// // // ### Créer une class Personnage
+// // // ### _Propriétés : nom(string), sac(tableau), argent(number)
+// // // ### _Méthode : prendre(objet, boite)
+// // // ### _Méthode : acheter(vendeur, objet)
+
+
+// class Personnage{
+//      constructor(nom, sac, argent){
+//           this.nom = nom;
+//           this.sac = sac;
+//           this.argent = argent;
+//           this.prendre = (objet, boite) =>{
+//                this.sac.push(objet);
+//                boite.splice(boite.indexOf(objet),1)
+//                console.log(`${this.nom} a mit un ${objet.nom} dans son sac`);
+               
+//           };
+//           this.acheter = (vendeur, objet) =>{
+//                if(this.argent >= objet.prix){
+//                     this.argent -= objet.prix;
+//                     vendeur.argent += objet.prix;
+//                     this.sac.push(objet);
+//                     vendeur.sac.splice(vendeur.sac.indexOf(objet),1);
+//                     console.log(` ${this.nom} a acheté un ${objet.nom} à ${vendeur.nom}`);
+//                }else{
+//                     console.log("t'as pas assez bro");
+//                }
+          
+//           }
+
+//      }    
+// }
+
+
+// // // ### Créer deux instances de Personnage et faites leur chacun [prendre] un objet de la boite avec leur méthode.
+
+// let naz = new Personnage("naz", [], 500);
+// let moun = new Personnage("Moun", [], 800);
+
+// // ### Ensuite faites acheter à l'un des deux, l'objet de l'autre.
+
+// naz.acheter(moun,terrarium);
+// console.log(naz.sac);
+// console.log(naz.argent);
+// moun.acheter(naz, terrarium);
+// console.log(moun.argent);
+
+
+
+
+
+// ## EXO4
+
+// ### Créez une class [Lieu] avec une propriété nom(string) et personnes(array vide).
+// ### Puis créez des instances de [Lieu]: MolenGeek, Snack et Maison
+class Lieu {
+     constructor(nom, personnes){
+         this.nom = nom;
+         this.personnes = personnes;
+     }
+ }
+ 
+ let molengeek = new Lieu("Molengeek", []);
+ let snack = new Lieu("Snack", []);
+ let maison = new Lieu("Maison", []);
+ 
+ // ### Puis créez une class [Personne] avec une propriété nom(string), prenom(string), argent(number) et une methode seDeplacer(), cette methode permet de vous déplacer dans les differents lieux en faisant appel à la méthode embarquer() du bus ou en y allant à pieds.
+ // ### Puis créez une instance de votre personnage.
+ 
+class Personne{
+     constructor(nom, prenom, argent){
           this.nom = nom;
-          this.prix = prix;
+          this.prenom = prenom;
+          this.argent = argent;
+          this.seDeplacer = (depart, arrivee, transport)=> {
+               if(transport == "pieds"){
+                    console.log("va à pied");
+
+               }else if(transport.embarquer(this) == true){
+                    console.log("est dans le BUS");
+               }else{
+                    console.log('no money honey');
+               }
+               depart.personnes.splice(depart.personnes.indexOf(this),1);
+               arrivee.personnes.push(this);
+
+               console.log(`${this.prenom} est arrivée à ${arrivee.nom}`);
+          }
      }
 }
 
-// ### Créer deux instances d'objets avec un nom et un prix
 
-let aquarium = new Objet("aquarium", 50);
-let terrarium = new Objet("terrarium", 60);
+  // ### Créez une class [Bus] avec une propriéte personnes(array vide), une propriéte caisse(number) et une methode embarquer() (qui sera appelée dans la méthode seDeplacer() de la personne) qui va vérifier si vous possedez l'argent, si oui, il le déduit de votre argent, et le rajoute à sa caisse, et le personnage rentre dans le bus. Le bus coute 2.80. Sinon, il faut y aller à pied.
+ // ### Créez une instance de Bus. 
 
-// // ### Créer une boite (tableau) et mettre les deux objets dedans.
+ class Bus{
+      constructor(personnes, caisse,){
+           this.personnes = personnes;
+           this.caisse = caisse;
+           this.embarquer = (usager) =>{
+                if(usager.argent >= 2.80){
+                   usager.argent -= 2.80;
+                   this.caisse += 2.80;
+                   this.personnes.push(usager); 
+                   console.log(`${usager.prenom} est entré.e dans le bus`);
 
-let boite = [];
-boite.push(aquarium);
-boite.push(terrarium);
+                   this.personnes.splice(this.personnes.indexOf(usager),1);
+                   console.log(`${usager.prenom} est sorti.e du bus`);
+                   return true;
+                }else{
+                     console.log("marche biatch");
+                     return false;
+                } 
 
+           }
+      }
+ }
+ 
+ let laStib = new Bus([], 0.00);
 
-// // ### Créer une class Personnage
-// // ### _Propriétés : nom(string), sac(tableau), argent(number)
-// // ### _Méthode : prendre(objet, boite)
-// // ### _Méthode : acheter(vendeur, objet)
+ let fanny = new Personne("Hunin", "Fanny", 10);
 
+ // ### 8h00 Vous êtes à la maison.
+maison.personnes.push(fanny);
+console.log(maison.personnes);
+ 
+ // ### 8h30 Vous prennez le bus vers MolenGeek.
 
-class Personnage{
-     constructor(nom, sac, argent){
-          this.nom = nom;
-          this.sac = sac;
-          this.argent = argent;
-          this.prendre = (objet, boite) =>{
-               this.sac.push(objet);
-               boite.splice(boite.indexOf(objet),1)
-               console.log(`${this.nom} a mit un ${objet.nom} dans son sac`);
-               
-          };
-          this.acheter = (vendeur, objet) =>{
-               if(this.argent >= objet.prix){
-                    this.argent -= objet.prix;
-                    vendeur.argent += objet.prix;
-                    this.sac.push(objet);
-                    vendeur.sac.splice(vendeur.sac.indexOf(objet),1);
-                    console.log(` ${this.nom} a acheté un ${objet.nom} à ${vendeur.nom}`);
-               }else{
-                    console.log("t'as pas assez bro");
-               }
-          
-          }
+ fanny.seDeplacer(maison,molengeek, laStib );
 
-     }    
-}
+ 
+ // ### 8h45 Vous êtes à MolenGeek.
+ 
+ 
+ // // ### 12h45 Vous sortez de MolenGeek, vous prenez le bus pour aller au snack.
 
+ fanny.seDeplacer(molengeek, snack, laStib);
+ 
+ 
+ // // ### 13h30 Vous sortez du snack, et vous rentrer pied à MolenGeek pour digérer.
 
-// // ### Créer deux instances de Personnage et faites leur chacun [prendre] un objet de la boite avec leur méthode.
+ fanny.seDeplacer(snack, molengeek, "pieds");
+ 
+ // // ### 17h10 Vous sortez de MolenGeek, vous prenez le bus pour rentrer chez vous.
+ 
+fanny.seDeplacer(molengeek, maison, laStib);
 
-let naz = new Personnage("naz", [], 500);
-let moun = new Personnage("Moun", [], 800);
+ // // ### Faites un console.log() de votre argent, ainsi que l'argent du Bus
 
-// ### Ensuite faites acheter à l'un des deux, l'objet de l'autre.
-
-naz.acheter(moun,terrarium);
-console.log(naz.sac);
-console.log(naz.argent);
-moun.acheter(naz, terrarium);
-console.log(moun.argent);
-
-
+ console.log(fanny.argent);
+ console.log(laStib.caisse);
