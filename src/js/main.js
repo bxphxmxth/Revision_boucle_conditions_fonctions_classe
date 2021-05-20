@@ -179,9 +179,9 @@
 // # Exercice 3 
 // - Créer un programme qui va nous afficher la date d'aujourd'hui avec le format jj/dd/aaaa
 
-let today = new Date().toLocaleDateString()
+// let today = new Date().toLocaleDateString()
 
-console.log(today)
+// console.log(today)
 
 
 
@@ -286,3 +286,75 @@ console.log(today)
 // - (Bonus dans le bonnus :faite en sorte qu'une tération se fasse tous les 2sec)
 // - Pour la fonction qui lui permet de gagner de l'argent, si son humeur est positif, tous les 2 heures, il dira via une console.log : "J'aime mon travail", mais par contre si son humeur est négatif, il dira "je préfére mon lit"
 
+
+
+
+// 1.
+// À l'aide d'une boucle for, entrer 10 prénoms de personnes dans un tableau et les saluer tour à tour.
+
+// let tab = [];
+// let nom;
+
+// for (i = 0; i < 10; i++){
+//      nom = prompt("entre un nom");
+//      tab.push(nom);
+//      console.log(`Bonjour ${tab[i]}`);
+// }
+
+
+
+
+
+
+// 2.
+// Sur base de l'exercice précédent, dire "Yo + prénom" aux personnes dont le prénom commence par un A, "Salut + prénom" aux personnes dont le prénom commence par un E, "ça gaze + prénom ?" aux personnes dont le prénom commence par un N
+
+// let tab2 = ["Adil", "Agim", "Mouna", "Nathan", "Seif", "Nasila", "Elvis", "Ali", "Elias 1 ", "Elias 2"];
+
+// for (let i = 0; i < tab2.length; i++ ){
+//      if(tab2[i].charAt(0) == "A"){
+//           console.log(`Yo ${tab2[i]}`);
+
+//      }else if(tab2[i].charAt(0) == "E"){
+//           console.log(`Salut ${tab2[i]}`);
+//      }else {
+//           console.log(`Ca gaze ${tab2[i]} ? `);
+//      }
+          
+//  }
+
+
+
+
+
+// 3.
+// Trouvez un moyen de mettre en majuscule un élément sur deux dans un array avec une boucle for (ex: ["JAVASCRIPT", "c'est", "FACILE"])
+
+// let tab = ["coucou", "cv", "yassine", "bg"];
+
+// for (let i = 0; i < tab.length; i++){
+//      if(tab.indexOf(tab[i]) % 2 == 0){
+//           tab[i] = tab[i].toUpperCase();
+//      } else{
+//           tab[i] = tab[i].toLowerCase();
+//      }
+// }
+
+// console.log(tab);
+
+
+
+// // Trouvez un moyen de faire rentrer un mot de passe a un utilisateur avec une boucle for et des conditions. S'il ne trouve pas le mot de passe après 3 essais, affichez-lui "accès refusé", sinon, affichez "accès accordé".
+
+let rep = prompt("entre un mdp");
+
+for (let i = 0; i < 2; i++){
+     if(rep != "123"){
+          alert("accès refusé, réessaye");
+          let rep = prompt("entre un mdp");
+
+          
+     }else {
+          alert("bienvenue");
+     }
+}
